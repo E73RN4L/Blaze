@@ -11,11 +11,11 @@ setup_service() {
   echo "Moving service file and setting up systemd..."
 
   # Get the current username
-  current_user=$(whoami)
+  current_user=$root
 
   # Replace 'User=root' with 'User=current_user' and set the correct path in the service file
-  sed -e "s/User=root/User=${current_user}/" \
-      -e "s|ExecStart=.*|ExecStart=/${current_user}/Blaze/target/release/blaze|" \
+  sed -e "s/User=root/User=$root/" \
+      -e "s|ExecStart=.*|ExecStart=/$root/Blaze/target/release/blaze|" \
       blaze.service > /tmp/blaze.service
 
   # Move the modified service file to the systemd directory and setup systemctl
